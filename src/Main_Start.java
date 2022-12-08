@@ -9,7 +9,7 @@ public class Main_Start {
         plateau[7][1] = 'C';
         Assets.printab(plateau);
 
-        Moves.Menu(plateau);
+        Interface.menu(plateau);
 
     }
 
