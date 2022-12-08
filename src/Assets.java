@@ -21,7 +21,7 @@ public class Assets {
         for (int x = 0; x < t[Y].length; x++) {
             t[Y][x] = Limite;
         }
-        Y = 8;
+        Y = (t.length-1);
         for (int x = 0; x < t[Y].length; x++) {
             t[Y][x] = Limite;
         }
