@@ -17,7 +17,7 @@ public class Moves {
         return position;
     }
 
-    public static int moveUP(char[][] tab, int moves, char FriendlyChar, char OpsChar){
+    public static int moveUP(char[][] tab, int moves, char FriendlyChar, char OpsChar){ //working flawlessly
         int[] positionYX = checkYX(tab, FriendlyChar);
         int X= positionYX[1];
         tab[3][1] = OpsChar;
