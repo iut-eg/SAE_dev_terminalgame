@@ -27,72 +27,113 @@ public class Moves {
     }
 
     public static int moveUP(char[][] tab, int moves, char[] FriendlyChar, char[] OpsChar){
-        int[] positionYX = checkYXnum(tab, FriendlyChar);
-        int X= positionYX[1];
-        int Y= positionYX[0];
+        int[] positionYXnum = checkYXnum(tab, FriendlyChar);
+        int X= positionYXnum[1], x = X;
+        int Y= positionYXnum[0], y= Y-1;
 
-        for (int y=Y-1; moves > 0 && y > 1 && tab[y][X] != OpsChar[0] && tab[y][X] != OpsChar[1]; y--, moves--)
+        for (;moves > 0 && y > 1 && tab[y][X] != OpsChar[0] && tab[y][X] != OpsChar[1]; y--,moves--)
         {
-
             if (tab[y][X]== '-'){
                 tab[y][X] = FriendlyChar[2];
             }
-
             else if (tab[y][X]== OpsChar[2]){
                 tab[y][X] = '-';
             }
             Assets.printab(tab);
             System.out.println(y+"\n");
         }
+        y += 1;
+        cleanPosition(tab,FriendlyChar, positionYXnum, y,x);
+        return moves;
+    }
 
+    public static int moveDOWN(char[][] tab, int moves, char[] FriendlyChar, char[] OpsChar){
+        int[] positionYXnum = checkYXnum(tab, FriendlyChar);
+        int X = positionYXnum[1], x = X;
+        int Y = positionYXnum[0], y = Y + 1;
+
+        for (; moves > 0 && y < (tab.length - 1) && tab[y][X] != OpsChar[0] && tab[y][X] != OpsChar[1]; y++, moves--) {
+            if (tab[y][X] == '-') {
+                tab[y][X] = FriendlyChar[2];
+            }
+            else if (tab[y][X] == OpsChar[2]) {
+                tab[y][X] = '-';
+            }
+            Assets.printab(tab);
+            System.out.println(y + "\n");
+        }
+        y -= 1;
+        cleanPosition(tab,FriendlyChar,positionYXnum,y,x);
+        return moves;
+    }
+
+    public static int moveRIGHT(char[][] tab, int moves, char[] FriendlyChar, char[] OpsChar){
+        int[] positionYXnum = checkYXnum(tab, FriendlyChar);
+        int X = positionYXnum[1], x = X+1;
+        int Y = positionYXnum[0], y = Y;
+
+        for (; moves > 0 && x < (tab[Y].length - 1) && tab[Y][x] != OpsChar[0] && tab[Y][x] != OpsChar[1]; x++, moves--)
+        {
+            if (tab[Y][x] == '-') {
+                tab[Y][x] = FriendlyChar[2];
+            }
+            else if (tab[Y][x] == OpsChar[2]) {
+                tab[Y][x] = '-';
+            }
+            Assets.printab(tab);
+            System.out.println(x + "\n");
+        }
+        x -= 1;
+        cleanPosition(tab,FriendlyChar,positionYXnum,y,x);
         return moves;
 
     }
 
+    public static int moveLEFT(char[][] tab, int moves, char[] FriendlyChar, char[] OpsChar){
+        int[] positionYXnum = checkYXnum(tab, FriendlyChar);
+        int X = positionYXnum[1], x = X-1;
+        int Y = positionYXnum[0], y = Y;
 
-    public static int moveDOWN(char[][] tab, int moves, char[] FriendlyChar, char[] OpsChar){
-        int[] playerYXnum = checkYXnum(tab, FriendlyChar);
-        int X= playerYXnum[1];
-        int Y= playerYXnum[0], y=Y+1;
-
-
-        for (; moves>0 && y<(tab.length-1) && tab[y][X]!=OpsChar[0] && tab[y][X]!= OpsChar[1]; y++, moves--)
-        {
-            if (tab[y][X]== '-'){
-                tab[y][X] = FriendlyChar[2];
+        for (; moves > 0 && x > 0 && tab[Y][x] != OpsChar[0] && tab[Y][x] != OpsChar[1]; x--, moves--) {
+            if (tab[Y][x] == '-') {
+                tab[Y][x] = FriendlyChar[2];
             }
-            else if (tab[y][X]== OpsChar[2] ){
-                tab[y][X] = '-';
+            else if (tab[Y][x] == OpsChar[2]) {
+                tab[Y][x] = '-';
             }
             Assets.printab(tab);
-            System.out.println(y+"\n");
+            System.out.println(x + "\n");
         }
-        y -= 1;
+        x += 1;
+        cleanPosition(tab,FriendlyChar,positionYXnum,y,x);
+        return moves;
+    }
 
+    public static void cleanPosition(char[][] tab,char PlayerChar[],int playerYXnum[],int y,int x){
 
+        int Y = playerYXnum[0], X = playerYXnum[1];
 
-
-
-
-        if (tab[y][X] == FriendlyChar[2] || tab[y][X] == FriendlyChar[1]){
-            tab[y][X] = FriendlyChar[1]; // si la dernière case est possédée -> mettre||garder en MAJ le CHAR
-        }
-        else {
-            tab[y][X] = FriendlyChar[0]; // sinon la dernière case est neutre -> mettre le chiffre
-        }
-
-        Assets.printab(tab);
-        System.out.println(y+"\n");
 
         if (playerYXnum[2] == 202){
             tab[Y][X] = '-';    // Si la case de départ était occupée par un chiffre, elle redevient neutre
         }
         else if (playerYXnum[2] == 303){
-            tab[Y][X] = FriendlyChar[2];    // Si elle était occupée par un CHAR, elle redevient occupée
+            tab[Y][X] = PlayerChar[2];    // Si elle était occupée par un CHAR, elle redevient occupée
         }
 
         Assets.printab(tab);
-        return moves;
+
+        if (tab[y][x] == PlayerChar[2] || tab[y][x] == PlayerChar[1]){
+            tab[y][x] = PlayerChar[1]; // si la dernière case est possédée → mettre || garder en MAJ le CHAR
+        }
+        else {
+            tab[y][x] = PlayerChar[0]; // sinon la dernière case est neutre → mettre le chiffre
+        }
+
+        Assets.printab(tab);
+        System.out.println(y+"\n");
+
+
 
     }
 
