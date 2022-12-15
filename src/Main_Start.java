@@ -13,8 +13,8 @@ public class Main_Start {
         plateau[2][5] = player2Uu[1];
         Assets.printab(plateau);
 
-  //      Interface.menu(plateau);
-        System.out.println("move="+Moves.moveUP(plateau, 1, player2Uu, player1Cc));
+  //    while (nb   Interface.menu(plateau);
+        new bdeplacement = Moves.moveUP(plateau, -2, player2Uu, player1Cc));
 
 
 
