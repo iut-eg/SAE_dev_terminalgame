@@ -12,12 +12,11 @@ public class Main_Start {
         plateau[4][6] = player2Uu[2];
         plateau[2][5] = player2Uu[1];
         Assets.printab(plateau);
+        System.out.println();
 
-  //    while (nb   Interface.menu(plateau);
-        new bdeplacement = Moves.moveUP(plateau, -2, player2Uu, player1Cc));
-
-
-
+        //Interface.menu(plateau);
+       // System.out.println(Moves.moveUP(plateau, 6, player1, player2Uu));
+        Interface.menu(plateau);
 
     }
 

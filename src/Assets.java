@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Assets {
 
     public static void printab(char[][]t) {
@@ -47,5 +49,17 @@ public class Assets {
         remplirLimite(tab);
         return tab;
     }
+    public static void Mouvements() {
+        Scanner saisie = new Scanner(System.in) ;
+        int choix ;
+        choix = saisie.nextInt() ;
+
+
+
+        if ( choix == 1 )
+            System.out.println("1");
+
+    }
+
 
 }
