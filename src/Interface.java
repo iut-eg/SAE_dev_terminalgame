@@ -7,7 +7,7 @@ public class Interface {
         int NbPas ;
         int numJ = 1;
         char press_enter = '!';
-        Scanner saisie = new Scanner(System.in) ;
+        Scanner saisie = new Scanner(System.in).useDelimiter("\n");
 
 
         System.out.println("Joueur"+numJ+": APPUIYEZ SUR ESPACE POUR CONTINUER");

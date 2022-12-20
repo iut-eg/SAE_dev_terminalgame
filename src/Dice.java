@@ -2,7 +2,7 @@ public class Dice {
 
     public static int rollDice() {
         int dice=0;
-        int max = 16, min =2, range = (max - min +1);
+        int max = 6, min =1, range = (max - min +1);
         /*
         for (int i=0; i< 20;i++ ) {
             dice = (int) (Math.random() * range) + min;
@@ -10,6 +10,6 @@ public class Dice {
 
         }*/
         dice = (int) (Math.random() * range) + min;
-        return dice;
+        return dice*2;
     }
 }
