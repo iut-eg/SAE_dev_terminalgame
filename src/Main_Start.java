@@ -1,7 +1,5 @@
 public class Main_Start {
 
-
-
     public static void main(String[] arg) {
 
         char[][] plateau = Assets.createPlateau(10,10);
@@ -13,8 +11,8 @@ public class Main_Start {
         plateau[2][5] = player2Uu[1];
         Assets.printab(plateau);
 
-  //      Interface.menu(plateau);
-        System.out.println("move="+Moves.moveUP(plateau, 1, player2Uu, player1Cc));
+        Interface.Rounds(plateau, player1Cc, player2Uu);
+      //  System.out.println("move="+Moves.moveUP(plateau, 1, player2Uu, player1Cc));
 
 
 
