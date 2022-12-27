@@ -4,8 +4,7 @@ public class Interface {
 
     public static void pressKEY(char KEY){
         Scanner saisie = new Scanner(System.in).useDelimiter("\n");
-        char saisiekey;
-
+       
         try{
             //saisiekey = (saisie.next().charAt(0));
             System.in.read();
@@ -43,11 +42,35 @@ public class Interface {
     
     }
 
+    public static int pressINT(int min, int max){
+        Scanner scan= new Scanner(System.in).useDelimiter("\n");
+        
+        System.out.println("Combien de déplacements?(<="+max+")");
+        while(!scan.hasNextInt()){
+            System.out.println("Combien de déplacements?(<="+max+")");
+            System.out.println("Enter next..");
+            scan.next();
+        } 
+        
+        System.out.println("hasnextint%");
+        
+
+        int getint = scan.nextInt();
+        System.out.println("getint="+getint);
+        
+        if (getint >= min && getint <= max){
+            return getint;}
+        else {
+                return -1;}
+    
+    }
+    
+
     public static void Rounds(char[][] tab, char[] Player, char[] Opponent) {
         
         int numJ = 1;
         
-        System.out.println("Joueur"+ numJ +": APPUIYEZ SUR ESPACE POUR CONTINUER");
+        System.out.println("Joueur"+ numJ +": APPUIYEZ SUR ENTREE POUR CONTINUER");
         pressENTER();
         
 
@@ -61,14 +84,15 @@ public class Interface {
             System.out.println("Quelle direction ? (eg: z6)");
             System.out.println("z. " + "haut");
             System.out.println("s. " + "bas");
-            System.out.println("q. " + "gauche");++
+            System.out.println("q. " + "gauche");
             System.out.println("d. " + "droite");
 
             char direc = pressZSQD();
-            System.out.println("Combien de déplacements?");
-            do{
-                sendmove = pressINT();
-            }while(sendmove > move);
+            
+            
+            sendmove = pressINT(0, move);
+            //}while(sendmove > move);
+            System.out.println("direc="+direc+"\t sendmove="+sendmove);
 
             if (direc == 'z'){
                 move = Moves.moveUP(tab, sendmove, Player, Opponent);}

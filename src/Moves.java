@@ -6,8 +6,6 @@ public class Moves {
 
     public static int[] checkYXnum(char[][] tab, char[] myChar) {
         int [] position = new int[3];
-        char myCharNumber ='0';
-
 
         for (int y = 0; y < tab.length; y++) {
             for (int x = 0; x < tab[y].length; x++) {
