@@ -45,19 +45,32 @@ public class Interface {
     public static int pressINT(int min, int max){
         Scanner scan= new Scanner(System.in).useDelimiter("\n");
         
-        System.out.println("Combien de déplacements?(<="+max+")");
+    /*System.out.println("Combien de déplacements?(<="+max+")");
         while(!scan.hasNextInt()){
             System.out.println("Combien de déplacements?(<="+max+")");
             System.out.println("Enter next..");
             scan.next();
         } 
         
-        System.out.println("hasnextint%");
-        
-
         int getint = scan.nextInt();
+        System.out.println("hasnextint"+ getint);
+*/
+        int getint = -1;
+        while (!(getint >= min && getint <= max)){
+            System.out.println("Combien de déplacements?(<="+max+")");
+            while (!scan.hasNextInt())
+            {
+                System.out.println("erreur: entrée =/= chiffre");
+                scan.next();
+            }
+            if (scan.hasNextInt()){
+                getint = scan.nextInt();
+                System.out.println("if..getint ="+getint);
+            }
+            
+        }
         System.out.println("getint="+getint);
-        
+
         if (getint >= min && getint <= max){
             return getint;}
         else {
