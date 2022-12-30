@@ -1,1 +1,1 @@
-fix: 1 move up contre la barrière élimine un move 
+fixed!: 1 move up contre la barrière élimine un move 

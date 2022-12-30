@@ -28,8 +28,9 @@ public class Moves {
         int[] positionYXnum = checkYXnum(tab, FriendlyChar);
         int X= positionYXnum[1], x = X;
         int Y= positionYXnum[0], y= Y-1;
+        int deleteMoves = 0;
 
-	for (;moves > 0 && y > 1 && tab[y][X] != OpsChar[0] && tab[y][X] != OpsChar[1]; y--,moves--)
+	for (;moves > 0 && y > 1 && tab[y][X] != OpsChar[0] && tab[y][X] != OpsChar[1]; y--,moves--, deleteMoves++)
         {
             if (tab[y][X]== '-'){
                 tab[y][X] = FriendlyChar[2];
@@ -42,15 +43,17 @@ public class Moves {
         }
         y += 1;
         cleanPosition(tab,FriendlyChar, positionYXnum, y,x);
-        return moves;
+        return deleteMoves;
     }
 
     public static int moveDOWN(char[][] tab, int moves, char[] FriendlyChar, char[] OpsChar){
         int[] positionYXnum = checkYXnum(tab, FriendlyChar);
         int X = positionYXnum[1], x = X;
         int Y = positionYXnum[0], y = Y + 1;
+        int deleteMoves = 0;
 
-        for (; moves > 0 && y < (tab.length - 1) && tab[y][X] != OpsChar[0] && tab[y][X] != OpsChar[1]; y++, moves--) {
+        for (; moves > 0 && y < (tab.length - 1) && tab[y][X] != OpsChar[0] && tab[y][X] != OpsChar[1]; y++, moves--, deleteMoves++) 
+        {
             if (tab[y][X] == '-') {
                 tab[y][X] = FriendlyChar[2];
             }
@@ -62,15 +65,15 @@ public class Moves {
         }
         y -= 1;
         cleanPosition(tab,FriendlyChar,positionYXnum,y,x);
-        return moves;
+        return deleteMoves;
     }
 
     public static int moveRIGHT(char[][] tab, int moves, char[] FriendlyChar, char[] OpsChar){
         int[] positionYXnum = checkYXnum(tab, FriendlyChar);
         int X = positionYXnum[1], x = X+1;
         int Y = positionYXnum[0], y = Y;
-
-        for (; moves > 0 && x < (tab[Y].length - 1) && tab[Y][x] != OpsChar[0] && tab[Y][x] != OpsChar[1]; x++, moves--)
+        int deleteMoves = 0;
+        for (; moves > 0 && x < (tab[Y].length - 1) && tab[Y][x] != OpsChar[0] && tab[Y][x] != OpsChar[1]; x++, moves--, deleteMoves++)
         {
             if (tab[Y][x] == '-') {
                 tab[Y][x] = FriendlyChar[2];
@@ -83,7 +86,7 @@ public class Moves {
         }
         x -= 1;
         cleanPosition(tab,FriendlyChar,positionYXnum,y,x);
-        return moves;
+        return deleteMoves;
 
     }
 
@@ -91,8 +94,9 @@ public class Moves {
         int[] positionYXnum = checkYXnum(tab, FriendlyChar);
         int X = positionYXnum[1], x = X-1;
         int Y = positionYXnum[0], y = Y;
-
-        for (; moves > 0 && x > 0 && tab[Y][x] != OpsChar[0] && tab[Y][x] != OpsChar[1]; x--, moves--) {
+        int deleteMoves = 0;
+        for (; moves > 0 && x > 0 && tab[Y][x] != OpsChar[0] && tab[Y][x] != OpsChar[1]; x--, moves--, deleteMoves++)
+        {
             if (tab[Y][x] == '-') {
                 tab[Y][x] = FriendlyChar[2];
             }
@@ -104,7 +108,7 @@ public class Moves {
         }
         x += 1;
         cleanPosition(tab,FriendlyChar,positionYXnum,y,x);
-        return moves;
+        return deleteMoves;
     }
 
     public static void cleanPosition(char[][] tab,char PlayerChar[],int playerYXnum[],int y,int x){

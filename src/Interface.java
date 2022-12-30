@@ -32,7 +32,10 @@ public class Interface {
             char saisiekey;
 
             do{
-                saisiekey = (saisie.next().charAt(0));
+                saisiekey = (saisie.next().charAt(0)); 
+                // ".next" prends les String (tout est un string) et saisit le premier char
+                // donc zerty saisit 'z' !!!
+               
                 
 
             }while (saisiekey != 'z' && saisiekey !='s' && saisiekey !='q' && saisiekey !='d');
@@ -45,16 +48,7 @@ public class Interface {
     public static int pressINT(int min, int max){
         Scanner scan= new Scanner(System.in).useDelimiter("\n");
         
-    /*System.out.println("Combien de déplacements?(<="+max+")");
-        while(!scan.hasNextInt()){
-            System.out.println("Combien de déplacements?(<="+max+")");
-            System.out.println("Enter next..");
-            scan.next();
-        } 
-        
-        int getint = scan.nextInt();
-        System.out.println("hasnextint"+ getint);
-*/
+    
         int getint = -1;
         while (!(getint >= min && getint <= max)){
             System.out.println("Combien de déplacements?(<="+max+")");
@@ -89,12 +83,12 @@ public class Interface {
 
         int move = Dice.rollDice();
         
-        while (move > 0) 
+        while (move > 0)
         {
             int sendmove = move;
             System.out.println("(Vous avez "+move+" déplacements restants)\n");
 
-            System.out.println("Quelle direction ? (eg: z6)");
+            System.out.println("Quelle direction ? ");
             System.out.println("z. " + "haut");
             System.out.println("s. " + "bas");
             System.out.println("q. " + "gauche");
@@ -105,17 +99,18 @@ public class Interface {
             
             sendmove = pressINT(0, move);
             //}while(sendmove > move);
-            System.out.println("direc="+direc+"\t sendmove="+sendmove);
+            System.out.println("move="+move+"\tdirec="+direc+"\tsendmove="+sendmove);
 
-            if (direc == 'z'){
-                move = Moves.moveUP(tab, sendmove, Player, Opponent);}
+            if (direc == 'z'){ // <-essayer avec case break
+                move -= Moves.moveUP(tab, sendmove, Player, Opponent);}
             else if (direc == 's'){
-                move = Moves.moveDOWN(tab, sendmove, Player, Opponent);}
+                move -= Moves.moveDOWN(tab, sendmove, Player, Opponent);}
             else if (direc == 'q'){
-                move = Moves.moveLEFT(tab, sendmove, Player, Opponent);}
+                move -= Moves.moveLEFT(tab, sendmove, Player, Opponent);}
             else if (direc == 'd'){
-                move = Moves.moveRIGHT(tab, sendmove, Player, Opponent);}
+                move -= Moves.moveRIGHT(tab, sendmove, Player, Opponent);}
         }
+        System.out.println("Tour terminé, au joueur suivant!");
                
 
    
