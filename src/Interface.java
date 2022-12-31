@@ -16,16 +16,17 @@ public class Interface {
     }
 
     public static void pressENTER(){
-        Scanner saisie = new Scanner(System.in).useDelimiter("\n");
-
-        try{
-            //saisiekey = (saisie.next().charAt(0));
-            System.in.read();
-            saisie.nextLine();
-
-        }catch (Exception exception){};
+        Scanner saisie = new Scanner(System.in).useDelimiter("");
+        char take='!';
+        for (int i=0;take != '\n';i++)
+        {
+            
+            take = saisie.next().charAt(0); // index:0 --> end char == '\0' à .index[+1]
+            //System.out.println(i+"\t"+take); split input en char & saisit '\n'
+            
+        }
+        System.out.println("enter!");
         
-    
     }
     public static char pressZSQD(){
         Scanner saisie = new Scanner(System.in).useDelimiter("\n"); {
