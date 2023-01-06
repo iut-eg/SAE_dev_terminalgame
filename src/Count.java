@@ -47,41 +47,44 @@ public class Count {
 
                 case "none":
                     System.out.println(detect+" detect");
+                    Xtails[NumOftails] = x;
+                    Ytails[NumOftails] = y;
                     t[y][x] = '0' /*PlayerChar[0]*/;
                     System.out.println("moved none.\n" + NumOftails + " tails");
                     detect = 0;
+                    
                     Assets.printab(t);
-                    if (t[y - 1][x] == PlayerChar[1] || t[y - 1][x] == PlayerChar[2] || t[y - 1][x] == PathTail) {
+                    if (t[y - 1][x] == PlayerChar[1] || t[y - 1][x] == PlayerChar[2] ) {
                         lastMove = "up";
                         t[y - 1][x] = PathTail;
                         //if (t[y - 1][x] != PathTail) {
                             detect++;
                         //}
                     }
-                    if (t[y][x - 1] == PlayerChar[1] || t[y][x - 1] == PlayerChar[2] || t[y][x - 1] == PathTail) {
+                    if (t[y][x - 1] == PlayerChar[1] || t[y][x - 1] == PlayerChar[2] ) {
                         lastMove = "left";
                         t[y][x - 1] = PathTail;
                         //if (t[y][x - 1] != PathTail) {
                             detect++;
                         //}
                     }
-                    if (t[y + 1][x] == PlayerChar[1] || t[y + 1][x] == PlayerChar[2] || t[y + 1][x] == PathTail) {
+                    if (t[y + 1][x] == PlayerChar[1] || t[y + 1][x] == PlayerChar[2] ) {
                         lastMove = "down";
                         t[y + 1][x] = PathTail;
                         //if (t[y + 1][x] != PathTail) {
                             detect++;
                         //}
                     }
-                    if (t[y][x + 1] == PlayerChar[1] || t[y][x + 1] == PlayerChar[2] || t[y][x + 1] == PathTail) {
+                    if (t[y][x + 1] == PlayerChar[1] || t[y][x + 1] == PlayerChar[2] ) {
                         lastMove = "right";
                         t[y][x + 1] = PathTail;
                         //if (t[y][x + 1] != PathTail) {
                             detect++;
                         //}
                     }
-                    if (detect < 0) {
+                    if (detect == 0) {
                         System.out.println("(none) else..");
-                        lastMove = "exit";
+                        lastMove = "tailingBack";
                     }
                     break;
 
@@ -98,38 +101,38 @@ public class Count {
 
                     detect = 0;
                     Assets.printab(t);
-                    if (t[y - 1][x] == PlayerChar[1] || t[y - 1][x] == PlayerChar[2] || t[y - 1][x] == PathTail) {
+                    if (t[y - 1][x] == PlayerChar[1] || t[y - 1][x] == PlayerChar[2] ) {
                         lastMove = "up";
-                        t[y - 1][x] = PathTail;
                         if (t[y - 1][x] != PathTail) {
                             detect++;
                         }
+                        t[y - 1][x] = PathTail;
                     }
-                    if (t[y][x - 1] == PlayerChar[1] || t[y][x - 1] == PlayerChar[2] || t[y][x - 1] == PathTail) {
+                    if (t[y][x - 1] == PlayerChar[1] || t[y][x - 1] == PlayerChar[2] ) {
                         lastMove = "left";
                         t[y][x - 1] = PathTail;
                         if (t[y][x - 1] != PathTail) {
                             detect++;
                         }
                     }
-                    if (t[y + 1][x] == PlayerChar[1] || t[y + 1][x] == PlayerChar[2] || t[y + 1][x] == PathTail) {
+                    if (t[y + 1][x] == PlayerChar[1] || t[y + 1][x] == PlayerChar[2] ) {
                         System.out.println("down detected!");
                         lastMove = "down";
-                        t[y + 1][x] = PathTail;
                         if (t[y + 1][x] != PathTail) {
                             detect++;
                         }
+                        t[y + 1][x] = PathTail;
                     }
-                    if (t[y][x + 1] == PlayerChar[1] || t[y][x + 1] == PlayerChar[2] || t[y][x + 1] == PathTail) {
+                    if (t[y][x + 1] == PlayerChar[1] || t[y][x + 1] == PlayerChar[2] ) {
                         lastMove = "right";
-                        t[y][x + 1] = PathTail;
                         if (t[y][x + 1] != PathTail) {
                             detect++;
                         }
+                        t[y][x + 1] = PathTail;
                     }
-                    if (detect < 0) {
+                    if (detect == 0) {
                         System.out.println("(right) else..");
-                        lastMove = "exit";
+                        lastMove = "tailingBack";
                     }
                     break;
 
@@ -146,38 +149,39 @@ public class Count {
                     detect = 0;
 
                     Assets.printab(t);
-                    if (t[y - 1][x] == PlayerChar[1] || t[y - 1][x] == PlayerChar[2] || t[y - 1][x] == PathTail) {
+                    if (t[y - 1][x] == PlayerChar[1] || t[y - 1][x] == PlayerChar[2] ) {
                         lastMove = "up";
-                        t[y - 1][x] = PathTail;
                         if (t[y - 1][x] != PathTail) {
                             detect++;
                         }
+                        t[y - 1][x] = PathTail;
                     }
-                    if (t[y][x - 1] == PlayerChar[1] || t[y][x - 1] == PlayerChar[2] || t[y][x - 1] == PathTail) {
+                    if (t[y][x - 1] == PlayerChar[1] || t[y][x - 1] == PlayerChar[2] ) {
                         lastMove = "left";
-                        t[y][x - 1] = PathTail;
-                        if (t[y][x] != PathTail) {
+                        if (t[y - 1][x] != PathTail) {
                             detect++;
+                            System.out.println("detected t >x("); // FUCKING ISSUE: WHY DOES IT DETECT IT????
                         }
+                        t[y][x - 1] = PathTail;
                     }
 
-                    if (t[y + 1][x] == PlayerChar[1] || t[y + 1][x] == PlayerChar[2] || t[y + 1][x] == PathTail) {
+                    if (t[y + 1][x] == PlayerChar[1] || t[y + 1][x] == PlayerChar[2] ) {
                         lastMove = "down";
-                        t[y + 1][x] = PathTail;
                         if (t[y + 1][x] != PathTail) {
                             detect++;
                         }
+                        t[y + 1][x] = PathTail;
                     }
-                    if (t[y][x + 1] == PlayerChar[1] || t[y][x + 1] == PlayerChar[2] || t[y][x + 1] == PathTail) {
+                    if (t[y][x + 1] == PlayerChar[1] || t[y][x + 1] == PlayerChar[2] ) {
                         lastMove = "right";
-                        t[y][x + 1] = PathTail;
                         if (t[y][x + 1] != PathTail) {
                             detect++;
                         }
+                        t[y][x + 1] = PathTail;
                     }
-                    if (detect < 0) {
+                    if (detect == 0) {
                         System.out.println("(down) else..");
-                        lastMove = "exit";
+                        lastMove = "tailingBack";
                     }
                     break;
 
@@ -195,37 +199,37 @@ public class Count {
                     detect = 0;
 
                     Assets.printab(t);
-                    if (t[y - 1][x] == PlayerChar[1] || t[y - 1][x] == PlayerChar[2] || t[y - 1][x] == PathTail) {
+                    if (t[y - 1][x] == PlayerChar[1] || t[y - 1][x] == PlayerChar[2] ) {
                         lastMove = "up";
                         t[y - 1][x] = PathTail;
                         if (t[y - 1][x] != PathTail) {
                             detect++;
                         }
                     }
-                    if (t[y][x - 1] == PlayerChar[1] || t[y][x - 1] == PlayerChar[2] || t[y][x - 1] == PathTail) {
+                    if (t[y][x - 1] == PlayerChar[1] || t[y][x - 1] == PlayerChar[2] ) {
                         lastMove = "left";
                         t[y][x - 1] = PathTail;
                         if (t[y][x - 1] != PathTail) {
                             detect++;
                         }
                     }
-                    if (t[y + 1][x] == PlayerChar[1] || t[y + 1][x] == PlayerChar[2] || t[y + 1][x] == PathTail) {
+                    if (t[y + 1][x] == PlayerChar[1] || t[y + 1][x] == PlayerChar[2] ) {
                         lastMove = "down";
                         t[y + 1][x] = PathTail;
                         if (t[y + 1][x] != PathTail) {
                             detect++;
                         }
                     }
-                    if (t[y][x + 1] == PlayerChar[1] || t[y][x + 1] == PlayerChar[2] || t[y][x + 1] == PathTail) {
+                    if (t[y][x + 1] == PlayerChar[1] || t[y][x + 1] == PlayerChar[2] ) {
                         lastMove = "right";
                         t[y][x + 1] = PathTail;
                         if (t[y][x + 1] != PathTail) {
                             detect++;
                         }
                     }
-                    if (detect < 0) {
+                    if (detect == 0) {
                         System.out.println("(left) else..");
-                        lastMove = "exit";
+                        lastMove = "tailingBack";
                     }
                     break;
 
@@ -243,52 +247,58 @@ public class Count {
                     detect = 0;
 
                     Assets.printab(t);
-                    if (t[y - 1][x] == PlayerChar[1] || t[y - 1][x] == PlayerChar[2] || t[y - 1][x] == PathTail) {
+                    if (t[y - 1][x] == PlayerChar[1] || t[y - 1][x] == PlayerChar[2] ) {
                         lastMove = "up";
                         t[y - 1][x] = PathTail;
                         if (t[y - 1][x] != PathTail) {
                             detect++;
                         }
                     }
-                    if (t[y][x - 1] == PlayerChar[1] || t[y][x - 1] == PlayerChar[2] || t[y][x - 1] == PathTail) {
+                    if (t[y][x - 1] == PlayerChar[1] || t[y][x - 1] == PlayerChar[2] ) {
                         lastMove = "left";
                         t[y][x - 1] = PathTail;
                         if (t[y][x - 1] != PathTail) {
                             detect++;
                         }
                     }
-                    if (t[y + 1][x] == PlayerChar[1] || t[y + 1][x] == PlayerChar[2] || t[y + 1][x] == PathTail) {
+                    if (t[y + 1][x] == PlayerChar[1] || t[y + 1][x] == PlayerChar[2] ) {
                         lastMove = "down";
                         t[y + 1][x] = PathTail;
                         if (t[y + 1][x] != PathTail) {
                             detect++;
                         }
                     }
-                    if (t[y][x + 1] == PlayerChar[1] || t[y][x + 1] == PlayerChar[2] || t[y][x + 1] == PathTail) {
+                    if (t[y][x + 1] == PlayerChar[1] || t[y][x + 1] == PlayerChar[2] ) {
                         lastMove = "right";
                         t[y][x + 1] = PathTail;
                         if (t[y][x + 1] != PathTail) {
                             detect++;
                         }
                     }
-                    if (detect < 0) {
+                    if (detect == 0) {
                         System.out.println("(up) else..");
-                        lastMove = "exit";
+                        lastMove = "tailingBack";
                     }
                     break;
 
-                case "exit":
-                    
-                    System.out.println("sending back to tails...");
-                    Assets.printab(t);
-                    while (NumOftails > 0) {
-                        x = Xtails[NumOftails];
-                        y = Ytails[NumOftails];
-                        NumOftails--;
-                        lastMove = "none";
-                    }
-                    System.out.println("no tails remaining.");
-                    break;
+
+                    case "tailingBack":
+
+                        System.out.println("moving back to tails...");
+                        Assets.printab(t);
+                        if (NumOftails > 0){
+                            System.out.println("taking tail (x;y)");
+                            x = Xtails[NumOftails];
+                            y = Ytails[NumOftails];
+                            NumOftails--;
+                            lastMove = "none";
+                            break;
+                        }
+                        else if (NumOftails <= 1){
+                            System.out.println("no tails remaining.");
+                            lastMove = "exit";
+                        }
+                        break;
 
             }
         } while (lastMove != "exit");
