@@ -30,7 +30,7 @@ public class Inputs {
         
     }
     public static char pressZSQD(){
-        Scanner input = new Scanner(System.in).useDelimiter("\n"); {
+        Scanner input = new Scanner(System.in).useDelimiter(""); {
             char inputkey;
 
             do{

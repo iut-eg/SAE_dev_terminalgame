@@ -30,7 +30,7 @@ public class Moves {
         int Y= positionYXnum[0], y= Y-1;
         int deleteMoves = 0;
 
-	for (;moves > 0 && y > 1 && tab[y][X] != OpsChar[0] && tab[y][X] != OpsChar[1]; y--,moves--, deleteMoves++)
+	for (;moves > 0 && y > 0 && tab[y][X] != OpsChar[0] && tab[y][X] != OpsChar[1]; y--,moves--, deleteMoves++)
         {
             if (tab[y][X]== '-'){
                 tab[y][X] = FriendlyChar[2];

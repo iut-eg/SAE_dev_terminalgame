@@ -8,14 +8,14 @@ public class Interface {
         char[] player1Cc = {'1', 'C', 'c'};
         char[] player2Uu = {'2', 'U', 'u'};
 
-        plateau[1][5] = player1Cc[0];
-        plateau[4][6] = player2Uu[2];
-        plateau[2][5] = player2Uu[1];
+        plateau[1][8] = player1Cc[0];
+        //plateau[4][6] = player2Uu[0];
+        plateau[8][1] = player2Uu[0];
         Assets.printab(plateau);
 
     
-    System.out.println("Bienvenue au jeu 'Contrôle de Territoire'!\n");
-    System.out.println("Nous allons décider du de l'ordre de passage...");
+    System.out.println("Bienvenue au jeu 'Contrôle de Territoire'!\t l'objectif est de posséder la plus grande zone\n");
+    System.out.println("Nous allons décider de l'ordre de passage...");
     System.out.println("Le plus grand lancé de dé commence la partie!\n");
     System.out.print("Joueur1, donnez votre nom et tapez ENTREE pour lancer le dé:");
     String NomJ1 = Inputs.inputString(20);
@@ -45,20 +45,25 @@ public class Interface {
         System.out.println(NomJ2+" à gagné, il commence en premier!\n");
         Rounds(plateau, player2Uu, player1Cc,6,6);
     }
+    //EndGame(plateau);
+        Count.zoneCount(plateau, player1Cc);
 
-    System.out.println("Jeu terminé, nous devons compter les points!");
-    
-    
-    
+        Count.zoneCount(plateau, player2Uu);
+
+
+
     }
 
     public static void Rounds(char[][] tab, char[] Player, char[] Opponent,/* String NomJ1, String NomJ2,*/int LastingRoundsJ1, int LastingRoundsJ2) 
     {
         
         
-        
-        System.out.println("(TOURn°"+LastingRoundsJ1+"Joueur "+ Player[0]+ " APPUIYEZ SUR ENTREE POUR LANCER LE DE");
-        Inputs.pressENTER();
+        if (Player[0] == '1'){
+        System.out.println("(TOURn°"+LastingRoundsJ1+") Joueur "+ Player[0]+ " APPUYEZ SUR ENTREE POUR LANCER LE DE");}
+        if (Player[0] == '2'){
+        System.out.println("(TOURn°"+LastingRoundsJ2+") Joueur "+ Player[0]+ " APPUYEZ SUR ENTREE POUR LANCER LE DE");}
+
+            Inputs.pressENTER();
         
 
         int move = Dice.rollDice();
@@ -82,7 +87,7 @@ public class Interface {
                 direc = Inputs.pressZSQD();
                 if (direc == 'h'){
                     Rules();}
-            }while(direc =='h');
+                }while(direc =='h');
 
             System.out.println("Combien de déplacements?(<="+move+")");
             sendmove = Inputs.pressINT(0, move);
@@ -101,36 +106,39 @@ public class Interface {
             
             
         }
-        System.out.println("Tour terminé, au joueur suivant!");
 
-        if (Player[0] == '1' && LastingRoundsJ1 != 0 ){
-            LastingRoundsJ1--;
-            Rounds(tab, Opponent, Player, LastingRoundsJ1, LastingRoundsJ2);
-        }
-        
-        else if (Player[0] == '2' && LastingRoundsJ2 != 0 ){
-            LastingRoundsJ2--;
-            Rounds(tab, Opponent, Player, LastingRoundsJ1, LastingRoundsJ2);
+            if (Player[0] == '1' && LastingRoundsJ1 <= 6) {
+                LastingRoundsJ1++;
+                if (LastingRoundsJ2 <= 6) {
+                    System.out.println("Tour terminé, placé au J2");
+                    Rounds(tab, Opponent, Player, LastingRoundsJ1, LastingRoundsJ2);
+                }
+            }
 
-        }
-        else{
-            System.out.println("error with counting rounds number");
-        }
-   
-   
-   
+            else if (Player[0] == '2' && LastingRoundsJ2 <=6 )
+            {
+                LastingRoundsJ2++;
+                if (LastingRoundsJ1 <= 6) {
+                    System.out.println("Tour terminé, place à J1"/*+username1*/);
+                    Rounds(tab, Opponent, Player, LastingRoundsJ1, LastingRoundsJ2);
+                }
+
+            }
+
+        System.out.println("Les deux joueurs ont terminés leurs tours!");
     }
+   
 
-    public static void EndGame()
+
+
+    public static void EndGame(char[][] plateau)
     {
 
-        //Moves.Count(plateau, player1Cc);
-        //Moves.Count(plateau, player2Uu);
 
     }
     public static void Rules()
     {
-        
+        System.out.println("Règle n°0:\tL'objectif est de posséder la plus grande zone de cases");
         System.out.println("Règle n°1:\tLes déplacements se font uniquement horizontalement & verticalement");
         System.out.println("Règle n°2:\tUne case précédememment occupée devient neutre lors d'un passage, puis conquérie au second passage");
         System.out.println("Règle n°3:\tVous avez 6 tours chacuns");
