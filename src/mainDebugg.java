@@ -6,8 +6,8 @@ public class mainDebugg {
         char[] player2Uu = {'2', 'U', 'u'};
 
         plateau[1][8] = player1Cc[0];
-        plateau[2][4] = player1Cc[1];
-        plateau[3][4] = plateau[3][5] = player1Cc[2];
+        plateau[2][4] =  plateau[2][5] = player1Cc[1];
+        plateau[3][4] = plateau[3][5] = plateau[3][6] = plateau[3][7] = plateau[4][6] = player1Cc[2];
 
         //plateau[4][6] = player2Uu[0];
         plateau[8][1] = player2Uu[0];
