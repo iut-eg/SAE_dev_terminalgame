@@ -16,22 +16,54 @@ public class Count {
 
     }
 
+    public static int getZone(char[][] t, char FindChar, char ReplaceWith) {
+        int y = 1, x = 1;
+        int zoneNumber=0;
+        
+        System.out.println("counting zone cases...");
+
+        
+        for (y = 1; y < t.length - 1; y++) {
+            for (x = 1; x < t[y].length - 1; x++) {
+                if (t[y][x] == FindChar) {
+                    zoneNumber++;
+                    t[y][x] = ReplaceWith;
+
+                    
+                    
+                }
+            }
+        }
+        return zoneNumber;
+    }
     public static void zoneCount(char[][] t, char[] PlayerChar){
         int[] yxCoor = {404};
-        int zoneSearchNumber=0;
+        int zoneSearchNumber=1;
+        int total=0, score=0; double zoneCombo=1;
         do{
             
-            System.out.println("Search number "+zoneSearchNumber+" incoming!");
+            System.out.println("\nSearch Zone number "+zoneSearchNumber+" incoming!");
           yxCoor = searchFirstCase(t, PlayerChar);
           zoneSearchNumber++;
         
           if(yxCoor[0] != 404){
 
           zonePathFinding(t,PlayerChar, yxCoor);
+          zoneCombo = getZone(t, 'Z', PlayerChar[0]);
+
+          score = (int) (zoneCombo * ((10+zoneCombo)/10));
+
+          System.out.println("Zone "+zoneSearchNumber+" = "+score+" points!");
+          total += score;
+
+
+
           }
 
         }while(yxCoor[0] != 404);
+        Assets.printab(t);
         System.out.println("ZONE COUNT DONE!");
+        System.out.println("\n Player "+PlayerChar[0]+"GOT TOTAL OF = "+total+"pts");
     }
 
     public static int[] searchFirstCase(char[][] t, char[] PlayerChar) {
@@ -42,9 +74,9 @@ public class Count {
 
         //doubleloop:
         for (y = 1; y < t.length - 1; y++) {
-            System.out.println("newline" + y);
+            //System.out.println("newline" + y);
             for (x = 1; x < t[y].length - 1; x++) {
-                System.out.println(y + "][" + x);
+            //    System.out.println(y + "][" + x);
                 if (t[y][x] == PlayerChar[1] || t[y][x] == PlayerChar[2]) {
                     System.out.printf("\t\tFOUND J%c [%d][%d]\n", PlayerChar[0], y, x);
                     yx[0]=y; yx[1]=x;
@@ -67,6 +99,8 @@ public class Count {
         int NumOftails = 0;
         String lastMove = "none";
         int detect = 0;
+
+        t[y][x] = PathZone;
         
 
         do {
@@ -304,38 +338,38 @@ public class Count {
         } while (lastMove != "exit");
     }
 
-    public static boolean clearTailPath(char[][] t, char[] PlayerChar, char PathTail, char PathZone, int y, int x){
+    public static /*boolean*/ void clearTailPath(char[][] t, char[] PlayerChar, char PathTail, char PathZone, int y, int x){
         
-        boolean isAlone;
+        //boolean isAlone; not sure of this one
         System.out.println("CLEARING PATHS");
         if (t[y][x + 1] == PathTail) {
             t[y][x + 1] = PlayerChar[2];
             System.out.println("(right)found a path");
-            isAlone=false;
+            //isAlone=false;
 
         }
         else if (t[y + 1][x] == PathTail) {
             t[y + 1][x] = PlayerChar[2];
             System.out.println("(down)found a path");
-            isAlone=false;
+            //isAlone=false;
 
         }
         else if (t[y][x - 1] == PathTail){
             t[y][x - 1] = PlayerChar[2];
             System.out.println("(left)found a path");
-            isAlone=false;
+            //isAlone=false;
             
 
         }
         else if (t[y - 1][x] == PathTail){  
             t[y - 1][x] = PlayerChar[2];
             System.out.println("(up)found a path");
-            isAlone=false;
+            //isAlone=false;
         }
         
         else {
             System.out.println("No leading paths found");
-            isAlone=true;
+            //isAlone=true;
         }
         t[y][x] = PathZone;
         

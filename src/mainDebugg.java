@@ -12,7 +12,7 @@ public class mainDebugg {
         plateau[5][3] = plateau[5][4] = plateau[5][6] = player1Cc[1];
         plateau[6][4] = player1Cc[1];
         plateau[7][3] = player1Cc[1];
-        //plateau[8][3] = player1Cc[1];
+        plateau[8][3] = plateau[8][4] = player1Cc[1];
         //plateau[4][6] = player2Uu[0];
         plateau[8][1] = player2Uu[0];
         
