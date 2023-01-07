@@ -16,24 +16,50 @@ public class Count {
 
     }
 
+    public static void zoneCount(char[][] t, char[] PlayerChar){
+        int[] yxCoor = {404};
+        int zoneSearchNumber=0;
+        do{
+            
+            System.out.println("Search number "+zoneSearchNumber+" incoming!");
+          yxCoor = searchFirstCase(t, PlayerChar);
+          zoneSearchNumber++;
+        
+          if(yxCoor[0] != 404){
 
-    public static void zoneCount(char[][] t, char[] PlayerChar) {
+          zonePathFinding(t,PlayerChar, yxCoor);
+          }
+
+        }while(yxCoor[0] != 404);
+        System.out.println("ZONE COUNT DONE!");
+    }
+
+    public static int[] searchFirstCase(char[][] t, char[] PlayerChar) {
         int y = 1, x = 1;
-        System.out.println("zoneCount...");
+        int[] yx = new int[2];
+        int[] notfound = {404};
+        System.out.println("search...");
 
-        doubleloop:
+        //doubleloop:
         for (y = 1; y < t.length - 1; y++) {
             System.out.println("newline" + y);
             for (x = 1; x < t[y].length - 1; x++) {
                 System.out.println(y + "][" + x);
                 if (t[y][x] == PlayerChar[1] || t[y][x] == PlayerChar[2]) {
-                    System.out.printf("trouvé J%c en t[%d][%d]\n", PlayerChar[0], y, x);
-
-                    break doubleloop;
+                    System.out.printf("\t\tFOUND J%c [%d][%d]\n", PlayerChar[0], y, x);
+                    yx[0]=y; yx[1]=x;
+                    return yx;
+                    //break doubleloop;
                 }
             }
         }
-
+        return notfound;
+    }
+    
+    public static void zonePathFinding(char[][] t, char[] PlayerChar, int[] yxCoordinates)
+    {
+        int y = yxCoordinates[0];
+        int x = yxCoordinates[1];
         char PathTail = 't';
         char PathZone = 'Z';
         int[] Xtails = new int[20];
@@ -41,15 +67,19 @@ public class Count {
         int NumOftails = 0;
         String lastMove = "none";
         int detect = 0;
+        
 
         do {
             switch (lastMove) {
 
                 case "none":
                     System.out.println(detect+" detect");
-                    Xtails[NumOftails] = x;
-                    Ytails[NumOftails] = y;
-                    t[y][x] = '0' /*PlayerChar[0]*/;
+                    for (;detect > 1; detect--, NumOftails++) {
+                        Xtails[NumOftails] = x;
+                        Ytails[NumOftails] = y;
+                        System.out.printf("NEW (#"+NumOftails+")tail: [%d][%d]\n",y,x);
+                    }
+                    
                     System.out.println("moved none.\n" + NumOftails + " tails");
                     detect = 0;
                     
@@ -57,42 +87,39 @@ public class Count {
                     if (t[y - 1][x] == PlayerChar[1] || t[y - 1][x] == PlayerChar[2] ) {
                         lastMove = "up";
                         t[y - 1][x] = PathTail;
-                        //if (t[y - 1][x] != PathTail) {
-                            detect++;
-                        //}
+                        detect++;
                     }
                     if (t[y][x - 1] == PlayerChar[1] || t[y][x - 1] == PlayerChar[2] ) {
                         lastMove = "left";
                         t[y][x - 1] = PathTail;
-                        //if (t[y][x - 1] != PathTail) {
-                            detect++;
-                        //}
+                        detect++;
                     }
                     if (t[y + 1][x] == PlayerChar[1] || t[y + 1][x] == PlayerChar[2] ) {
                         lastMove = "down";
                         t[y + 1][x] = PathTail;
-                        //if (t[y + 1][x] != PathTail) {
-                            detect++;
-                        //}
+                        detect++;
                     }
                     if (t[y][x + 1] == PlayerChar[1] || t[y][x + 1] == PlayerChar[2] ) {
                         lastMove = "right";
                         t[y][x + 1] = PathTail;
-                        //if (t[y][x + 1] != PathTail) {
-                            detect++;
-                        //}
+                        detect++;
+                    }
+                    if (detect >= 1){
+                        t[y][x] = PathZone;
                     }
                     if (detect == 0) {
-                        System.out.println("(none) else..");
+                        System.out.println("(none) else.. -> tailingBack");
                         lastMove = "tailingBack";
                     }
+                    
                     break;
 
                 case "right":
                     System.out.println(detect+" detect");
                     for (;detect > 1; detect--, NumOftails++) {
-                        Xtails[NumOftails] = x;
-                        Ytails[NumOftails] = y;    
+                        Xtails[NumOftails] = x;         
+                        Ytails[NumOftails] = y; 
+                        System.out.printf("NEW (#"+NumOftails+")tail: [%d][%d]\n",y,x);   
 
                     }
                     x++;
@@ -103,45 +130,37 @@ public class Count {
                     Assets.printab(t);
                     if (t[y - 1][x] == PlayerChar[1] || t[y - 1][x] == PlayerChar[2] ) {
                         lastMove = "up";
-                        if (t[y - 1][x] != PathTail) {
-                            detect++;
-                        }
                         t[y - 1][x] = PathTail;
+                        detect++;
                     }
                     if (t[y][x - 1] == PlayerChar[1] || t[y][x - 1] == PlayerChar[2] ) {
                         lastMove = "left";
                         t[y][x - 1] = PathTail;
-                        if (t[y][x - 1] != PathTail) {
-                            detect++;
-                        }
+                        detect++;
                     }
                     if (t[y + 1][x] == PlayerChar[1] || t[y + 1][x] == PlayerChar[2] ) {
                         System.out.println("down detected!");
                         lastMove = "down";
-                        if (t[y + 1][x] != PathTail) {
-                            detect++;
-                        }
                         t[y + 1][x] = PathTail;
+                        detect++;
                     }
                     if (t[y][x + 1] == PlayerChar[1] || t[y][x + 1] == PlayerChar[2] ) {
                         lastMove = "right";
-                        if (t[y][x + 1] != PathTail) {
-                            detect++;
-                        }
                         t[y][x + 1] = PathTail;
+                        detect++;
                     }
                     if (detect == 0) {
-                        System.out.println("(right) else..");
+                        System.out.println("(right) else.. -> tailingBack");
                         lastMove = "tailingBack";
                     }
                     break;
 
                 case "down":
                     System.out.println(detect+" detect");
-                    if (detect > 1) {
+                    for (;detect > 1; detect--, NumOftails++) {
                         Xtails[NumOftails] = x;
-                        Ytails[NumOftails] = y;    
-                        NumOftails++;
+                        Ytails[NumOftails] = y; 
+                        System.out.printf("NEW (#"+NumOftails+")tail: [%d][%d]\n",y,x);   
                     }
                     y++;
                     t[y][x] = PathZone;
@@ -151,36 +170,27 @@ public class Count {
                     Assets.printab(t);
                     if (t[y - 1][x] == PlayerChar[1] || t[y - 1][x] == PlayerChar[2] ) {
                         lastMove = "up";
-                        if (t[y - 1][x] != PathTail) {
-                            detect++;
-                        }
+                        detect++;
                         t[y - 1][x] = PathTail;
                     }
                     if (t[y][x - 1] == PlayerChar[1] || t[y][x - 1] == PlayerChar[2] ) {
                         lastMove = "left";
-                        if (t[y - 1][x] != PathTail) {
-                            detect++;
-                            System.out.println("detected t >x("); // FUCKING ISSUE: WHY DOES IT DETECT IT????
-                        }
+                        detect++;
                         t[y][x - 1] = PathTail;
                     }
 
                     if (t[y + 1][x] == PlayerChar[1] || t[y + 1][x] == PlayerChar[2] ) {
                         lastMove = "down";
-                        if (t[y + 1][x] != PathTail) {
-                            detect++;
-                        }
+                        detect++;
                         t[y + 1][x] = PathTail;
                     }
                     if (t[y][x + 1] == PlayerChar[1] || t[y][x + 1] == PlayerChar[2] ) {
                         lastMove = "right";
-                        if (t[y][x + 1] != PathTail) {
-                            detect++;
-                        }
+                        detect++;
                         t[y][x + 1] = PathTail;
                     }
                     if (detect == 0) {
-                        System.out.println("(down) else..");
+                        System.out.println("(down) else..-> tailingBack");
                         lastMove = "tailingBack";
                     }
                     break;
@@ -188,10 +198,10 @@ public class Count {
 
                 case "left":
                     System.out.println(detect+" detect");
-                    if (detect > 1) {
+                    for (;detect > 1; detect--, NumOftails++) {
                         Xtails[NumOftails] = x;
-                        Ytails[NumOftails] = y;    
-                        NumOftails++;
+                        Ytails[NumOftails] = y;
+                        System.out.printf("NEW (#"+NumOftails+")tail: [%d][%d]\n",y,x);
                     }
                     x--;
                     t[y][x] = PathZone;
@@ -202,33 +212,25 @@ public class Count {
                     if (t[y - 1][x] == PlayerChar[1] || t[y - 1][x] == PlayerChar[2] ) {
                         lastMove = "up";
                         t[y - 1][x] = PathTail;
-                        if (t[y - 1][x] != PathTail) {
-                            detect++;
-                        }
+                        detect++;
                     }
                     if (t[y][x - 1] == PlayerChar[1] || t[y][x - 1] == PlayerChar[2] ) {
                         lastMove = "left";
                         t[y][x - 1] = PathTail;
-                        if (t[y][x - 1] != PathTail) {
-                            detect++;
-                        }
+                        detect++;
                     }
                     if (t[y + 1][x] == PlayerChar[1] || t[y + 1][x] == PlayerChar[2] ) {
                         lastMove = "down";
                         t[y + 1][x] = PathTail;
-                        if (t[y + 1][x] != PathTail) {
-                            detect++;
-                        }
+                        detect++;
                     }
                     if (t[y][x + 1] == PlayerChar[1] || t[y][x + 1] == PlayerChar[2] ) {
                         lastMove = "right";
                         t[y][x + 1] = PathTail;
-                        if (t[y][x + 1] != PathTail) {
-                            detect++;
-                        }
+                        detect++;
                     }
                     if (detect == 0) {
-                        System.out.println("(left) else..");
+                        System.out.println("(left) else..-> tailingBack");
                         lastMove = "tailingBack";
                     }
                     break;
@@ -236,10 +238,10 @@ public class Count {
                 case "up":
                     System.out.println(detect+" detect");
 
-                    if (detect > 1) {
+                    for (;detect > 1; detect--, NumOftails++) {
                         Xtails[NumOftails] = x;
-                        Ytails[NumOftails] = y;    
-                        NumOftails++;
+                        Ytails[NumOftails] = y;  
+                        System.out.printf("NEW (#"+NumOftails+")tail: [%d][%d]\n",y,x);
                     }
                     y--;
                     t[y][x] = PathZone;
@@ -250,33 +252,25 @@ public class Count {
                     if (t[y - 1][x] == PlayerChar[1] || t[y - 1][x] == PlayerChar[2] ) {
                         lastMove = "up";
                         t[y - 1][x] = PathTail;
-                        if (t[y - 1][x] != PathTail) {
-                            detect++;
-                        }
+                        detect++;
                     }
                     if (t[y][x - 1] == PlayerChar[1] || t[y][x - 1] == PlayerChar[2] ) {
                         lastMove = "left";
                         t[y][x - 1] = PathTail;
-                        if (t[y][x - 1] != PathTail) {
-                            detect++;
-                        }
+                        detect++;
                     }
                     if (t[y + 1][x] == PlayerChar[1] || t[y + 1][x] == PlayerChar[2] ) {
                         lastMove = "down";
                         t[y + 1][x] = PathTail;
-                        if (t[y + 1][x] != PathTail) {
-                            detect++;
-                        }
+                        detect++;
                     }
                     if (t[y][x + 1] == PlayerChar[1] || t[y][x + 1] == PlayerChar[2] ) {
                         lastMove = "right";
                         t[y][x + 1] = PathTail;
-                        if (t[y][x + 1] != PathTail) {
-                            detect++;
-                        }
+                        detect++;
                     }
                     if (detect == 0) {
-                        System.out.println("(up) else..");
+                        System.out.println("(up) else..-> tailingBack");
                         lastMove = "tailingBack";
                     }
                     break;
@@ -284,24 +278,70 @@ public class Count {
 
                     case "tailingBack":
 
-                        System.out.println("moving back to tails...");
-                        Assets.printab(t);
+                        System.out.println("moving back to tails...\t("+NumOftails+"left)");
+                        
                         if (NumOftails > 0){
-                            System.out.println("taking tail (x;y)");
-                            x = Xtails[NumOftails];
-                            y = Ytails[NumOftails];
+                            
+                            x = Xtails[NumOftails-1];
+                            y = Ytails[NumOftails-1];
+                            System.out.println("taking tail #"+(NumOftails-1)+"(y;x)= ["+y+"]["+x+"]");
+                            t[y][x] = 'T';
                             NumOftails--;
+                            Assets.printab(t);
+                            clearTailPath(t, PlayerChar, PathTail, PathZone, y, x);
                             lastMove = "none";
+                            
                             break;
                         }
                         else if (NumOftails <= 1){
                             System.out.println("no tails remaining.");
                             lastMove = "exit";
                         }
+                        
                         break;
 
             }
         } while (lastMove != "exit");
+    }
+
+    public static boolean clearTailPath(char[][] t, char[] PlayerChar, char PathTail, char PathZone, int y, int x){
+        
+        boolean isAlone;
+        System.out.println("CLEARING PATHS");
+        if (t[y][x + 1] == PathTail) {
+            t[y][x + 1] = PlayerChar[2];
+            System.out.println("(right)found a path");
+            isAlone=false;
+
+        }
+        else if (t[y + 1][x] == PathTail) {
+            t[y + 1][x] = PlayerChar[2];
+            System.out.println("(down)found a path");
+            isAlone=false;
+
+        }
+        else if (t[y][x - 1] == PathTail){
+            t[y][x - 1] = PlayerChar[2];
+            System.out.println("(left)found a path");
+            isAlone=false;
+            
+
+        }
+        else if (t[y - 1][x] == PathTail){  
+            t[y - 1][x] = PlayerChar[2];
+            System.out.println("(up)found a path");
+            isAlone=false;
+        }
+        
+        else {
+            System.out.println("No leading paths found");
+            isAlone=true;
+        }
+        t[y][x] = PathZone;
+        
+        Assets.printab(t);
+
+    
     }
 
 }
