@@ -1,2 +1,5 @@
-Territoire de elias, pas de faraz authorizé ici.
-C'est compris ? Ok
+
+fixed!: double enter in direc=scan causes java.lang ERROR
+fixed!: Rounds number (from to 6) not inverse
+fix: insert usernames during rounds previews
+fix:
