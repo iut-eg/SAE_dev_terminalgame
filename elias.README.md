@@ -1,2 +1,5 @@
-fixed!: 1 move up contre la barrière élimine un move 
-fixed!: pressENTER
+
+fixed!: double enter in direc=scan causes java.lang ERROR
+fixed!: Rounds number (from to 6) not inverse
+fix: insert usernames during rounds previews
+fix:

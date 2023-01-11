@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch AsciiPrint",
+            "request": "launch",
+            "mainClass": "AsciiPrint",
+            "projectName": "SAE_dev_terminalgame_c8c57ae1"
+        },
+        {
+            "type": "java",
+            "name": "Launch mainDebugg",
+            "request": "launch",
+            "mainClass": "mainDebugg",
+            "projectName": "SAE_dev_terminalgame_c8c57ae1"
+        },
+        {
+            "type": "java",
             "name": "Launch Java Program",
             "request": "launch",
             "mainClass": ""

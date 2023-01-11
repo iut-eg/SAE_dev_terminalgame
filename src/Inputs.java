@@ -30,7 +30,7 @@ public class Inputs {
         
     }
     public static char pressZSQD(){
-        Scanner input = new Scanner(System.in).useDelimiter("\n"); {
+        Scanner input = new Scanner(System.in).useDelimiter(""); {
             char inputkey;
 
             do{
@@ -60,11 +60,11 @@ public class Inputs {
             }
             if (scan.hasNextInt()){
                 getint = scan.nextInt();
-                System.out.println("if..getint ="+getint);
+                //System.out.println("if..getint ="+getint);
             }
             
         }
-        System.out.println("getint="+getint);
+        //System.out.println("getint="+getint);
 
         if (getint >= min && getint <= max){
             return getint;}
