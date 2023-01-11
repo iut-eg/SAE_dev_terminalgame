@@ -2,7 +2,7 @@
 
 public class Moves {
 
-
+    static char emptyCase = (char)9724;
 
     public static int[] checkYXnum(char[][] tab, char[] myChar) {
         int [] position = new int[3];
@@ -32,14 +32,14 @@ public class Moves {
 
 	for (;moves > 0 && y > 0 && tab[y][X] != OpsChar[0] && tab[y][X] != OpsChar[1]; y--,moves--, deleteMoves++)
         {
-            if (tab[y][X]== '-'){
+            if (tab[y][X]== emptyCase){
                 tab[y][X] = FriendlyChar[2];
             }
             else if (tab[y][X]== OpsChar[2]){
-                tab[y][X] = '-';
+                tab[y][X] = emptyCase;
             }
-            Assets.printab(tab);
-            System.out.println(y+"\n");
+            //Assets.printab(tab);
+            //System.out.println(y+"\n");
         }
         y += 1;
         cleanPosition(tab,FriendlyChar, positionYXnum, y,x);
@@ -54,14 +54,14 @@ public class Moves {
 
         for (; moves > 0 && y < (tab.length - 1) && tab[y][X] != OpsChar[0] && tab[y][X] != OpsChar[1]; y++, moves--, deleteMoves++) 
         {
-            if (tab[y][X] == '-') {
+            if (tab[y][X] == emptyCase) {
                 tab[y][X] = FriendlyChar[2];
             }
             else if (tab[y][X] == OpsChar[2]) {
-                tab[y][X] = '-';
+                tab[y][X] = emptyCase;
             }
-            Assets.printab(tab);
-            System.out.println(y + "\n");
+            //Assets.printab(tab);
+            //System.out.println(y + "\n");
         }
         y -= 1;
         cleanPosition(tab,FriendlyChar,positionYXnum,y,x);
@@ -75,14 +75,14 @@ public class Moves {
         int deleteMoves = 0;
         for (; moves > 0 && x < (tab[Y].length - 1) && tab[Y][x] != OpsChar[0] && tab[Y][x] != OpsChar[1]; x++, moves--, deleteMoves++)
         {
-            if (tab[Y][x] == '-') {
+            if (tab[Y][x] == emptyCase) {
                 tab[Y][x] = FriendlyChar[2];
             }
             else if (tab[Y][x] == OpsChar[2]) {
-                tab[Y][x] = '-';
+                tab[Y][x] = emptyCase;
             }
-            Assets.printab(tab);
-            System.out.println(x + "\n");
+            //Assets.printab(tab);
+            //System.out.println(x + "\n");
         }
         x -= 1;
         cleanPosition(tab,FriendlyChar,positionYXnum,y,x);
@@ -97,14 +97,14 @@ public class Moves {
         int deleteMoves = 0;
         for (; moves > 0 && x > 0 && tab[Y][x] != OpsChar[0] && tab[Y][x] != OpsChar[1]; x--, moves--, deleteMoves++)
         {
-            if (tab[Y][x] == '-') {
+            if (tab[Y][x] == emptyCase) {
                 tab[Y][x] = FriendlyChar[2];
             }
             else if (tab[Y][x] == OpsChar[2]) {
-                tab[Y][x] = '-';
+                tab[Y][x] = emptyCase;
             }
-            Assets.printab(tab);
-            System.out.println(x + "\n");
+            //Assets.printab(tab);
+            //System.out.println(x + "\n");
         }
         x += 1;
         cleanPosition(tab,FriendlyChar,positionYXnum,y,x);
@@ -117,7 +117,7 @@ public class Moves {
 
 
         if (playerYXnum[2] == 202){
-            tab[Y][X] = '-';    // Si la case de départ était occupée par un chiffre, elle redevient neutre
+            tab[Y][X] = emptyCase;    // Si la case de départ était occupée par un chiffre, elle redevient neutre
         }
         else if (playerYXnum[2] == 303){
             tab[Y][X] = PlayerChar[2];    // Si elle était occupée par un CHAR, elle redevient occupée
@@ -132,8 +132,8 @@ public class Moves {
             tab[y][x] = PlayerChar[0]; // sinon la dernière case est neutre → mettre le chiffre
         }
 
-        Assets.printab(tab);
-        System.out.println(y+"\n");
+        //Assets.printab(tab);
+        //System.out.println(y+"\n");
 
 
 

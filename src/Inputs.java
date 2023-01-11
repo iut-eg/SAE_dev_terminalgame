@@ -60,11 +60,11 @@ public class Inputs {
             }
             if (scan.hasNextInt()){
                 getint = scan.nextInt();
-                System.out.println("if..getint ="+getint);
+                //System.out.println("if..getint ="+getint);
             }
             
         }
-        System.out.println("getint="+getint);
+        //System.out.println("getint="+getint);
 
         if (getint >= min && getint <= max){
             return getint;}

@@ -2,8 +2,9 @@ public class mainDebugg {
 
     public static void main(String[] arg) {
         char[][] plateau = Assets.createPlateau(10, 10);
-        char[] player1Cc = {'1', 'C', 'c'};
-        char[] player2Uu = {'2', 'U', 'u'};
+        
+        char[] player1Cc = {(char)9332, (char)9461,(char)9312};
+        char[] player2Uu = {(char)9333, (char)9462,(char)9313};
 
         //plateau[1][8] = player1Cc[0];
         plateau[2][4] =  plateau[2][5] = plateau[2][7] = player1Cc[1];
